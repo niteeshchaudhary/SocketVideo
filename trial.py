@@ -12,6 +12,17 @@ def generate_key_pair():
     public_key = private_key.public_key()
     return private_key, public_key
 
+# Serialize public key to bytes
+def serialize_public_key(public_key):
+    return public_key.public_bytes(
+        encoding=serialization.Encoding.PEM,
+        format=serialization.PublicFormat.SubjectPublicKeyInfo
+    )
+
+# Deserialize public key from bytes
+def deserialize_public_key(serialized_key):
+    return serialization.load_pem_public_key(serialized_key, backend=default_backend())
+
 # Encrypt data with a public key
 def encrypt_data(public_key, data):
     encrypted_data = public_key.encrypt(
@@ -41,11 +52,22 @@ def main():
     # Generate key pair
     private_key, public_key = generate_key_pair()
 
-    # Data to be encrypted
-    original_data = b"Hello, World!"
+    # Serialize public key
+    serialized_public_key = serialize_public_key(public_key)
+    print(serialized_public_key)
 
-    # Encrypt data with public key
-    encrypted_data = encrypt_data(public_key, original_data)
+    key=input("key ").encode()
+    key=key.replace(b'\\n', b'\n')
+    print(key)
+
+    # Deserialize public key
+    deserialized_public_key = deserialize_public_key(key)
+
+    # Data to be encrypted
+    original_data = "Hello, World!".encode()
+
+    # Encrypt data with deserialized public key
+    encrypted_data = encrypt_data(deserialized_public_key, original_data)
 
     # Decrypt data with private key
     decrypted_data = decrypt_data(private_key, encrypted_data)
