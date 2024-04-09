@@ -1,0 +1,10 @@
+- create a virtual environment
+- python -m venv venv
+- activate it:
+    - in windows : venv/Scripts/activate
+    - in linux : source venv/bin/activate
+- install requirements
+- pip install -r requirements.txt
+- run server: python server.py
+- run client: python client.py
+- after running client it will generate public key: copy entire key in 'single quotes' without quotes and paste it when it asks for public key

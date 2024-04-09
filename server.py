@@ -3,7 +3,7 @@ import threading
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import serialization
 import os
-import socket, cv2, pickle,struct,imutils
+import socket, cv2, pickle,struct
 
 class Server:
     def __init__(self, host, port):
