@@ -64,6 +64,7 @@ class Server:
             print(f'Client sent: .{client_data}.')
 
             if client_data=="0":
+                client_socket.send("\n".join(self.getPublicKeys_name()).encode("utf-8"))
                 # Message to other peer
                 to_user = client_socket.recv(1024).decode("utf-8")
                 message = client_socket.recv(4*1024)

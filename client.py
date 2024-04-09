@@ -86,6 +86,15 @@ class Client:
                 except:
                     print("\n: unable to decrypt message")
 
+            if  self.operation=="0":
+                server_msg = msg.decode("utf-8")
+                pairs_=server_msg.split("\n")
+                for i in pairs_:
+                    user_name,pub_key=i.split(":")
+                    pub_key=pub_key.encode("utf-8")
+                    
+                    self.public_keys[user_name]=pub_key.replace(b'\\n', b'\n')
+
             if  self.operation=="3":
                 server_msg = msg.decode("utf-8")
                 print(server_msg)
